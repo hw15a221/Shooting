@@ -1,6 +1,6 @@
 #include "Game.hpp"
 
-//hw15a152 野中健人　担当　F,G,H
+//hw15a152 野中健人　担当　E,F,G,H
 //hw15a221 利上優人　担当　a,b,c
 // TODO: 砲台の位置を画面左に、ターゲットの位置を画面右に移動させる。(A)
 // TODO: 雲の位置を左から右に動かす。見えなくなったら左端に戻す。(B)
@@ -27,6 +27,9 @@ void Start()
     targetRect = Rect(80, -140, 40, 40);
     bulletPos.x = -999;
     score = 0;
+    
+    PlayBGM("bgm_maoudamashii_8bit07.mp3);
+    PlaySound("se_maoudamashii_system27.mp3");
 }
 
 // 1/60秒ごとに呼ばれる関数です。モデルの更新と画面の描画を行います。
@@ -44,7 +47,7 @@ void Update()
         // ターゲットと弾の当たり判定
         Rect bulletRect(bulletPos, Vector2(32, 20));
         if (targetRect.Overlaps(bulletRect)) {
-            score += 1;         // スコアの加算
+            score += 100;         // スコアの加算
             bulletPos.x = -999; // 弾を発射可能な状態に戻す
         }
     }
@@ -69,8 +72,8 @@ void Update()
     FillRect(targetRect, Color::red);
 
     // スコアの描画
-    SetFont("nicoca_v1.ttf", 20.0f);
-    DrawText(FormatString("%02d", score), Vector2(-319, 199), Color::black);
-    DrawText(FormatString("%02d", score), Vector2(-320, 200), Color::white);
+    SetFont("nicoca_v1.ttf", 50.0f);
+    DrawText(FormatString("%03d", score), Vector2(-319, 199), Color::black);
+    DrawText(FormatString("%03d", score), Vector2(-320, 200), Color::white);
 }
 
